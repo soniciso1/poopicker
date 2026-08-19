@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>poopicker</title>
+<style>
+  :root{--bg:#0c0c0f;--fg:#ececf1;--dim:#9a9aa6;--line:#26262e;--card:#16161c;--accent:#7a5cff}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--fg);
+       font:400 16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+       padding:26px 16px 40px}
+  .wrap{max-width:680px;margin:0 auto}
+  h1{font-size:26px;margin:0 0 2px;letter-spacing:.01em}
+  .sub{color:var(--dim);font-size:14px;margin:0 0 22px}
+  h2{font-size:13px;text-transform:uppercase;letter-spacing:.09em;color:var(--dim);
+     margin:24px 0 10px;font-weight:600}
+  a.card{display:block;text-decoration:none;color:inherit;background:var(--card);
+         border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:10px}
+  a.card:hover,a.card:focus{border-color:var(--accent);outline:none}
+  .row{display:flex;align-items:baseline;gap:10px}
+  .nm{font-weight:700;font-size:17px}
+  .tag{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+       padding:2px 7px;border-radius:999px;border:1px solid var(--line);color:var(--dim)}
+  .tag.live{color:#5ee08a;border-color:#2c5c3f}
+  .tag.test{color:#ff7a7a;border-color:#5c2c2c}
+  .tag.dev{color:#b39bff;border-color:#413066}
+  .why{color:var(--dim);font-size:13.5px;margin-top:4px}
+  .btns{display:flex;flex-wrap:wrap;gap:8px}
+  button{font:600 14px system-ui,sans-serif;padding:9px 15px;border-radius:9px;
+         border:1px solid var(--line);background:#22222a;color:var(--fg);cursor:pointer}
+  button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+  .now{color:var(--dim);font-size:13.5px;margin-top:9px;min-height:1.4em}
+  .note{color:var(--dim);font-size:12.5px;border-top:1px solid var(--line);
+        margin-top:26px;padding-top:14px}
+  code{background:#1e1e26;padding:1px 5px;border-radius:5px;font-size:12.5px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>poopicker</h1>
+  <p class="sub">Pick a build, and which console you're running it on.</p>
+
+  <h2>Build</h2>
+
+  <a class="card" href="https://soniciso1.github.io/pooP2JB/">
+    <div class="row"><span class="nm">pooP2JB</span><span class="tag live">live</span></div>
+    <div class="why">The one to use. Proven on retail 12.00 and devkit 12.40.</div>
+  </a>
+
+  <a class="card" href="https://soniciso1.github.io/pooP2JB-test/">
+    <div class="row"><span class="nm">pooP2JB-test</span><span class="tag test">test</span></div>
+    <div class="why">Staging. Changes land here first and get a hardware run before promotion.</div>
+  </a>
+
+  <a class="card" href="https://soniciso1.github.io/pooP2JB-dev/">
+    <div class="row"><span class="nm">pooP2JB-dev</span><span class="tag dev">dev</span></div>
+    <div class="why">Release-mode gated: run parameters baked in, non-canonical runs refused. Carries diagnostics.</div>
+  </a>
+
+  <h2>Console type</h2>
+  <div class="btns">
+    <button type="button" data-hw="retail">Retail</button>
+    <button type="button" data-hw="devkit">Devkit / Testkit</button>
+    <button type="button" data-hw="">Show both</button>
+  </div>
+  <div class="now" id="now"></div>
+
+  <p class="note">
+    The console type decides which kstuff build the payload menu offers &mdash;
+    <code>kstuff.elf</code> for retail, <code>kstuff-devkit-only.elf</code> for devkit.
+    It is stored in this browser rather than passed in the address bar, because the
+    exploit pages bake their run parameters in and refuse a non-canonical query.
+    <br><br>
+    It is stored per origin, so choosing here covers the three
+    <code>soniciso1.github.io</code> builds. A console loading the site through a local
+    DNS host is a different origin and keeps its own choice &mdash; pick it again there.
+  </p>
+
+</div>
+
+<script>
+(function () {
+    var KEY = "p2jb:hw";
+    function read() { try { return localStorage.getItem(KEY) || ""; } catch (e) { return ""; } }
+    function paint() {
+        var hw = read(), b = document.querySelectorAll("button[data-hw]"), i;
+        for (i = 0; i < b.length; i++)
+            b[i].setAttribute("aria-pressed", String(b[i].getAttribute("data-hw") === hw));
+        var n = document.getElementById("now");
+        n.textContent = hw === "retail" ? "Retail — kstuff.elf will be offered."
+                      : hw === "devkit" ? "Devkit — kstuff-devkit-only.elf will be offered."
+                      : "Not set — both kstuff tiles will be shown.";
+    }
+    document.addEventListener("click", function (e) {
+        var b = e.target.closest ? e.target.closest("button[data-hw]") : null;
+        if (!b) return;
+        var hw = b.getAttribute("data-hw") || "";
+        try { if (hw) localStorage.setItem(KEY, hw); else localStorage.removeItem(KEY); } catch (x) { }
+        paint();
+    });
+    paint();
+})();
+</script>
+</body>
+</html>
