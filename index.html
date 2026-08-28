@@ -78,77 +78,9 @@
         Run parameters baked in, non-canonical runs refused. Carries diagnostics.</div>
     </a>
   </div>
-
-  <div class="tile">
-    <h2>Split sites</h2>
-    <div class="fw">one chain each &middot; local only, served off this host</div>
-    <div class="chain">pooP2JB carries both chains behind one landing. These are the same
-      engines split apart, each with its own site and its own firmware range.</div>
-
-    <a class="card" href="http://poopsploit/">
-      <div class="row"><span class="nm">poopsploit</span><span class="tag retail">retail / testkit</span></div>
-      <div class="why">7.00 &ndash; 12.00, 25 firmware profiles. Rebuilt from the retail upstream
-        <code>jordyidk/slopkit</code>; every file upstream also ships is byte-identical to it.
-        12.00 checked against the retail binary in IDA.</div>
-    </a>
-
-    <a class="card" href="http://poopsploit-dev/">
-      <div class="row"><span class="nm">poopsploit-dev</span><span class="tag dev">dev</span><span class="tag devkit">devkit</span></div>
-      <div class="why">Same engine plus the console-type picker and <code>kstuff-devkit-only.elf</code>.
-        Keeps a kit's own <code>0x81</code> so Release Check Mode still reads Development.</div>
-    </a>
-
-    <a class="card" href="http://p2jb/">
-      <div class="row"><span class="nm">p2jb</span><span class="tag retail">retail / testkit</span></div>
-      <div class="why">12.00 &ndash; 12.70, six profiles. The live pooP2JB engine unchanged, trimmed
-        to the p2jb range. All six checked against their own retail binaries &mdash; 1122 syscall
-        stubs exact, 0 defects.</div>
-    </a>
-
-    <a class="card" href="http://p2jb-dev/">
-      <div class="row"><span class="nm">p2jb-dev</span><span class="tag dev">dev</span><span class="tag devkit">devkit</span></div>
-      <div class="why">Same, from pooP2JB-dev. Keeps the console-type picker and is the only split
-        build carrying <code>kstuff-devkit-only.elf</code>, so a kit wants this one. Takes no query
-        flags &mdash; its run parameters are baked in.</div>
-    </a>
-  </div>
-
-  <div class="tile">
-    <h2>pooP2JB test</h2>
-    <div class="fw">7.00 &ndash; 12.70 &middot; staging, not for daily use</div>
-
-    <a class="card" href="https://soniciso1.github.io/pooP2JB-test/">
-      <div class="row"><span class="nm">pooP2JB-test</span><span class="tag test">test</span></div>
-      <div class="why">Staging for <b>pooP2JB</b>. Changes land here first and get a hardware run before promotion.</div>
-    </a>
-
-    <a class="card" href="https://soniciso1.github.io/pooP2JB-dev-test/">
-      <div class="row"><span class="nm">pooP2JB-dev-test</span><span class="tag test">test</span></div>
-      <div class="why">Staging for <b>pooP2JB-dev</b>. Currently a straight mirror of it.</div>
-    </a>
-  </div>
-
-  <div class="tile">
-    <h2>P2JB standalone &mdash; hosted</h2>
-    <div class="fw">12.00 &ndash; 12.70 &middot; GitHub Pages, no LAN host needed</div>
-    <div class="chain">The same two split p2jb builds as above, published so they run from anywhere.
-      Nothing about the chain changes: the beacon and one-shot latch simply fall back when there is
-      no exploit host behind them, so a static host behaves like the LAN one.</div>
-
-    <a class="card" href="https://soniciso1.github.io/P2JB/">
-      <div class="row"><span class="nm">P2JB</span><span class="tag retail">retail / testkit</span></div>
-      <div class="why">12.00 &ndash; 12.70, six profiles, each checked against its own retail binary.
-        Jailbroke end to end on hardware &mdash; <code>joinRet=0x0 shellcodeRet=0x0</code>, elfldr on
-        <code>:9021</code>. ELF tiles deliver from inside the console, so no server helper is needed.</div>
-    </a>
-
-    <a class="card" href="https://soniciso1.github.io/P2JB-dev/">
-      <div class="row"><span class="nm">P2JB-dev</span><span class="tag dev">dev</span><span class="tag devkit">devkit</span></div>
-      <div class="why">Same engine for a kit. Keeps a kit's own <code>0x81</code> instead of forcing
-        <code>0x82</code>, so Release Check Mode still reads Development, and it is the only split
-        build carrying <code>kstuff-devkit-only.elf</code>. Also confirmed on hardware.</div>
-    </a>
-  </div>
+
+
+
 
   <p class="note">
     <b>Which one is for my console?</b> A <b>devkit</b> needs the devkit site &mdash; it sets target ID
