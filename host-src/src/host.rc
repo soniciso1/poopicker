@@ -1,0 +1,78 @@
+#include <windows.h>
+#include "resource.h"
+
+IDD_MAIN DIALOGEX 0, 0, 620, 400
+STYLE DS_SETFONT | DS_CENTER | WS_MINIMIZEBOX | WS_POPUP | WS_VISIBLE |
+      WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
+CAPTION "PS4 / PS5 Exploit Host"
+FONT 8, "Segoe UI", 400, 0, 1
+BEGIN
+    LTEXT           "PS4 / PS5 EXPLOIT HOST", IDC_TITLE, 10, 7, 300, 16
+
+    LTEXT           "This PC (console DNS):", IDC_IPLABEL, 10, 33, 78, 9
+    EDITTEXT        IDC_IP, 92, 31, 70, 13, ES_AUTOHSCROLL
+    PUSHBUTTON      "Start", IDC_START, 170, 30, 44, 15
+    PUSHBUTTON      "Stop", IDC_STOP, 218, 30, 44, 15, WS_DISABLED
+    LTEXT           "stopped", IDC_STATUS, 272, 33, 140, 9
+
+    LTEXT           "", IDC_SITES, 10, 52, 400, 9
+
+    AUTOCHECKBOX    "Block firmware updates (NXDOMAIN)", IDC_BLOCK_FW,
+                    10, 66, 180, 10
+    AUTOCHECKBOX    "Block game updates (NXDOMAIN)", IDC_BLOCK_GAME,
+                    200, 66, 180, 10
+
+    LTEXT           "User's Guide opens:", IDC_GUIDELABEL, 10, 84, 68, 9
+    COMBOBOX        IDC_GUIDE, 92, 82, 120, 200,
+                    CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Open firewall ports", IDC_FW_OPEN, 220, 81, 88, 15
+    PUSHBUTTON      "Turn firewall off", IDC_FW_OFF, 312, 81, 80, 15
+    AUTOCHECKBOX    "auto-scroll", IDC_AUTOSCROLL, 402, 84, 60, 10
+    PUSHBUTTON      "Support the dev", IDC_DONATE, 508, 81, 102, 15
+
+    LTEXT           "Online site (blank = use bundled):", IDC_CUSTOMLABEL,
+                    10, 104, 118, 9
+    EDITTEXT        IDC_CUSTOM, 132, 102, 380, 13, ES_AUTOHSCROLL
+    PUSHBUTTON      "Clear", IDC_CUSTOM_CLEAR, 518, 101, 44, 15
+
+    CONTROL         "", IDC_LOG, "RICHEDIT50W",
+                    ES_MULTILINE | ES_READONLY | ES_AUTOVSCROLL | ES_NOHIDESEL |
+                    WS_VSCROLL | WS_HSCROLL | WS_BORDER | NOT WS_TABSTOP,
+                    10, 122, 600, 268
+END
+
+IDD_DONATE DIALOGEX 0, 0, 400, 180
+STYLE DS_SETFONT | DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Support the dev"
+FONT 8, "Segoe UI", 400, 0, 1
+BEGIN
+    LTEXT           "SUPPORT THE DEV", IDC_DON_TITLE, 10, 8, 300, 16
+    LTEXT           "Click Copy to put an address on the clipboard.",
+                    IDC_DON_NOTE, 10, 26, 300, 9
+
+    LTEXT           "", DON_LABEL_BASE + 0, 10, 44, 62, 9
+    EDITTEXT        DON_ADDR_BASE + 0, 76, 42, 268, 13, ES_AUTOHSCROLL | ES_READONLY
+    PUSHBUTTON      "Copy", DON_COPY_BASE + 0, 348, 41, 42, 15
+
+    LTEXT           "", DON_LABEL_BASE + 1, 10, 64, 62, 9
+    EDITTEXT        DON_ADDR_BASE + 1, 76, 62, 268, 13, ES_AUTOHSCROLL | ES_READONLY
+    PUSHBUTTON      "Copy", DON_COPY_BASE + 1, 348, 61, 42, 15
+
+    LTEXT           "", DON_LABEL_BASE + 2, 10, 84, 62, 9
+    EDITTEXT        DON_ADDR_BASE + 2, 76, 82, 268, 13, ES_AUTOHSCROLL | ES_READONLY
+    PUSHBUTTON      "Copy", DON_COPY_BASE + 2, 348, 81, 42, 15
+
+    LTEXT           "", DON_LABEL_BASE + 3, 10, 104, 62, 9
+    EDITTEXT        DON_ADDR_BASE + 3, 76, 102, 268, 13, ES_AUTOHSCROLL | ES_READONLY
+    PUSHBUTTON      "Copy", DON_COPY_BASE + 3, 348, 101, 42, 15
+
+    LTEXT           "", DON_LABEL_BASE + 4, 10, 124, 62, 9
+    EDITTEXT        DON_ADDR_BASE + 4, 76, 122, 268, 13, ES_AUTOHSCROLL | ES_READONLY
+    PUSHBUTTON      "Copy", DON_COPY_BASE + 4, 348, 121, 42, 15
+
+    LTEXT           "", DON_LABEL_BASE + 5, 10, 144, 62, 9
+    EDITTEXT        DON_ADDR_BASE + 5, 76, 142, 268, 13, ES_AUTOHSCROLL | ES_READONLY
+    PUSHBUTTON      "Copy", DON_COPY_BASE + 5, 348, 141, 42, 15
+
+    DEFPUSHBUTTON   "Close", IDCANCEL, 348, 161, 42, 15
+END
