@@ -76,6 +76,26 @@
     </a>
   </div>
 
+  <div class="tile">
+    <h2>P2JB</h2>
+    <p class="fw">12.00 &ndash; 12.70</p>
+    <p class="chain">A <code>kqueueex</code> <code>cr_ref</code> leak feeding a triple-free
+       race. Reach for this only <i>above</i> 12.00 &mdash; on 12.00 and below poopsploit
+       does the same job in seconds. Budget roughly an hour: the reference count has to
+       wrap 2<sup>32</sup> before the race can start, and the page looks idle for most of
+       that on purpose. Leave the console on until the payload menu appears. A
+       &ldquo;system software error&rdquo; right at the end is expected &mdash; press OK
+       and the payload page loads.</p>
+
+    <a class="card" href="https://soniciso1.github.io/P2JB/">
+      <div class="row"><span class="nm">p2jb</span><span class="tag retail">retail / testkit</span></div>
+    </a>
+
+    <a class="card" href="https://soniciso1.github.io/P2JB-dev/">
+      <div class="row"><span class="nm">p2jb-dev</span><span class="tag devkit">devkit</span></div>
+    </a>
+  </div>
+
 
   <p class="note">
     <b>Which one is for my console?</b> A <b>devkit</b> needs the devkit site &mdash; it sets target ID
