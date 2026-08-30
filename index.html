@@ -36,6 +36,15 @@
         margin-top:22px;padding-top:14px}
   .note b{color:var(--fg);font-weight:600}
   code{background:#1e2230;padding:1px 5px;border-radius:5px;font-size:12.5px}
+  .urlbar{display:flex;gap:9px;margin-bottom:9px}
+  .urlbar input{flex:1 1 auto;min-width:0;background:var(--card);color:var(--fg);
+       border:1px solid var(--line);border-radius:11px;padding:12px 14px;
+       font:16.5px/1.2 inherit;font-weight:700}
+  .urlbar input:focus{border-color:var(--accent);outline:none}
+  .urlbar button{flex:0 0 auto;background:var(--card);color:var(--fg);
+       border:1px solid var(--line);border-radius:11px;padding:12px 22px;
+       font:700 16.5px/1.2 inherit;cursor:pointer}
+  .urlbar button:hover,.urlbar button:focus{border-color:var(--accent);outline:none}
 </style>
 </head>
 <body>
@@ -97,6 +106,17 @@
   </div>
 
 
+  <div class="tile">
+    <h2>Browse</h2>
+    <p class="chain">Type any address and go. A bare hostname works &mdash; on the offline
+       host every mirrored site answers by name, so <code>p2jb</code> is enough.</p>
+    <div class="urlbar">
+      <input id="urlbox" type="text" value="http://" spellcheck="false"
+             autocomplete="off" autocorrect="off" autocapitalize="off">
+      <button type="button" id="urlgo">Go</button>
+    </div>
+  </div>
+
   <p class="note">
     <b>Which one is for my console?</b> A <b>devkit</b> needs the devkit site &mdash; it sets target ID
     <code>0x81</code> and the debugger auth ID, and offers the devkit kstuff build. <b>Retail</b> and
@@ -106,5 +126,30 @@
   </p>
 
 </div>
+<script>
+/* Plain ES5, no arrow functions and no template strings - this has to run in the PS5
+   browser, which is old WebKit. Enter in the box and the Go button both navigate, and
+   a bare hostname like "p2jb" gets http:// prepended so the DNS-spoofed names on the
+   offline host work without typing a scheme. */
+(function () {
+  var box = document.getElementById("urlbox");
+  var btn = document.getElementById("urlgo");
+  if (!box || !btn) return;
+  function go() {
+    var v = (box.value || "").replace(/^\s+|\s+$/g, "");
+    if (!v || v === "http://") return;
+    if (!/^[a-zA-Z][a-zA-Z0-9+.\-]*:\/\//.test(v)) v = "http://" + v;
+    window.location.href = v;
+  }
+  btn.onclick = go;
+  box.onkeydown = function (e) {
+    e = e || window.event;
+    if (e.keyCode === 13) { go(); return false; }
+  };
+  box.onfocus = function () {
+    if (box.value === "http://") { try { box.select(); } catch (err) { } }
+  };
+})();
+</script>
 </body>
 </html>
